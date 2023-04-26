@@ -36,11 +36,13 @@ def predict(features):
 
 @app.get('/')
 def preview():
+    '''this function is just to preview the api - ensure that api is working'''
     return {'hello world': 'House Price Prediction System API [v1].'}
 
 
 @app.post('/predict')
 def predict_house_price(house_features: HouseFeatures):
+    '''this function takes the features and returns the prediction'''
     features = np.array(house_features.features).reshape(1, -1)
     prediction = predict(features)
     return {'prediction': prediction[0]}
