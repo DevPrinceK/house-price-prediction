@@ -88,15 +88,47 @@ def preview():
 
 
 @app.get('/cities')
-def get_unique_values():
+def get_cities():
     '''this function returns the unique values of the city column'''
     try:
+        # provide the full path to the data file
         df = pd.read_csv('data/data.csv')
+
+        # check if the DataFrame is empty
+        if df.empty:
+            return {'Error': 'Data file is empty.'}
+
+        # remove all rows with missing values
+        df = df.dropna(axis=1)
+
+        # get unique values from column 'column_name'
         cities = df['city'].unique()
     except Exception as err:
-        return {'Error': err}
+        import traceback
+        traceback.print_exc()
+        return {'Error': str(err)}
     else:
-        return {'cities': cities, 'Total Cities': len(cities)}
+        return {"cities": cities.tolist()}
+
+
+# NOTE: This function is not needed anymore
+# @app.get('/cities')
+# def get_cities():
+#     '''this function returns the unique values of the city column'''
+#     try:
+#         df = pd.read_csv('data/data.csv')
+
+#         # remove all rows with missing values
+#         df = df.dropna(axis=1)
+
+#         cities = df['city'].unique()
+#     except Exception as err:
+#         print(f"Error: {err}")
+#         import traceback
+#         traceback.print_exc()
+#         return {'Error': err}
+#     else:
+#         return cities
 
 
 @app.post('/predict')
