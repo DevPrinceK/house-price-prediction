@@ -12,9 +12,9 @@ This is a machine learning model that predicts the price of a house based on var
 
 # Getting Started
 To get started with the house price prediction model, you will need to have Python 3 installed on your system. Once you have Python 3 installed, you can clone this repository and install the required dependencies:
->git clone https://github.com/DevPrinceK/house-price-prediction-model.git
->cd house-price-prediction-model
->pip install -r requirements.txt
+>git clone https://github.com/DevPrinceK/house-price-prediction-model.git <br>
+>cd house-price-prediction-model <br>
+>pip install -r requirements.txt 
 
 
 # Training
