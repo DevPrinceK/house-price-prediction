@@ -2,13 +2,13 @@
 This is a machine learning model that predicts the price of a house based on various features such as the number of bedrooms, bathrooms, square footage, and location
 
 # Table of Contents
--**Getting Started**
--**Usage**
--**Training**
--**Built With**
--**Contributing**
--**License**
--**Acknowledgments**
+**Getting Started** <br>
+**Training** <br>
+**Run** <br>
+**EndPoints** <br>
+**Built With** <br>
+**Contributing** <br>
+**Acknowledgments**
 
 # Getting Started
 To get started with the house price prediction model, you will need to have Python 3 installed on your system. Once you have Python 3 installed, you can clone this repository and install the required dependencies:
@@ -46,11 +46,19 @@ The cities endpoint fetches all the unique cities in our dataset. This is useful
     "city": str
 }
 
+# Contribution
+Contributions to the house price prediction model are welcome. If you find a bug or have a suggestion for improvement, please open an issue or submit a pull request.
+
+
 
 # Built With
--**Python 3**
--**scikit-learn**
--**pandas**
--**numpy**
+**Python 3** <br>
+**scikit-learn** <br>
+**pandas** <br>
+**numpy** <br>
+
+# Links
+You can find [The Datasets here](https://www.kaggle.com/datasets/shree1992/housedata/versions/2?resource=download) <br>
+
 
 
