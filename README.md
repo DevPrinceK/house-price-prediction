@@ -1,5 +1,9 @@
 # House Price Prediction Model
-This is a machine learning model that predicts the price of a house based on various features such as the number of bedrooms, bathrooms, square footage, and location
+This is a machine learning model that predicts the price of a house based on various features such as the number of bedrooms, bathrooms, square footage, and location. <br>
+The two models used are: <br>
+* KNN Regressor
+* Linear Regression
+
 
 # Table of Contents
 **Getting Started** <br>
