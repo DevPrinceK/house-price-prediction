@@ -3,6 +3,7 @@ import pickle
 from fastapi import FastAPI
 from pydantic import BaseModel
 import numpy as np
+import pandas as pd
 
 app = FastAPI()
 
@@ -16,33 +17,85 @@ app.add_middleware(
 )
 
 
-class HouseFeatures(BaseModel):
-    features: list
+class House(BaseModel):
+    bedrooms: float
+    bathrooms: float
+    sqft_living: float
+    sqft_lot: float
+    floors: float
+    yr_built: float
+    yr_renovated: float
+    city: str
 
 
 def load_model():
     '''this loads the model from the dir and return it to the predict function'''
-    with open('models/model.pkl', 'rb') as file:
+    with open('models/lr_model.pkl', 'rb') as file:
         model = pickle.load(file)
     return model
 
 
-def predict(features):
+def load_scaler():
+    '''This loads the scaler used to scale the model - for scaling the input features'''
+    with open('scalers/scaler.pkl', 'rb') as file:
+        scaler = pickle.load(file)
+    return scaler
+
+
+def scale_input_features(input_features: House):
+    '''this function scales the input features'''
+    # Convert the dictionary to a Pandas DataFrame
+    df = pd.DataFrame([input_features])
+
+    # Load X_pickle.pkl
+    with open('models/X_pickle.pkl', 'rb') as f:
+        X = pickle.load(f)
+
+    # One-hot encode the input features
+    df = pd.get_dummies(df)
+
+    # Add missing columns with 0 as the default value
+    for col in X.columns:
+        if col not in df.columns:
+            df[col] = 0
+
+    # Ensure the order of columns in df matches X
+    df = df[X.columns]
+
+    # Scale the input features using the trained scaler
+    scaler = load_scaler()
+    scaled_df = scaler.transform(df)
+    return scaled_df
+
+
+def predict(features: House):
     '''this function takes the features and returns the prediction'''
     model = load_model()
-    prediction = model.predict(features)
+    scaled_features = scale_input_features(features)
+    prediction = model.predict(scaled_features)
     return prediction
 
 
 @app.get('/')
 def preview():
     '''this function is just to preview the api - ensure that api is working'''
-    return {'hello world': 'House Price Prediction System API [v1].'}
+    return {'Hello World': 'House Price Prediction System API [v1].'}
 
 
 @app.post('/predict')
-def predict_house_price(house_features: HouseFeatures):
+def predict_house_price(house_features: House):
     '''this function takes the features and returns the prediction'''
-    features = np.array(house_features.features).reshape(1, -1)
-    prediction = predict(features)
+    sample_input = {
+        'bedrooms': house_features.bedrooms,
+        'bathrooms': house_features.bathrooms,
+        'sqft_living': house_features.sqft_living,
+        'sqft_lot': house_features.sqft_lot,
+        'floors': house_features.floors,
+        'yr_built': house_features.yr_built,
+        'yr_renovated': house_features.yr_renovated,
+        'city': house_features.city
+    }
+
+    prediction = predict(sample_input)
+
     return {'prediction': prediction[0]}
