@@ -1,1 +1,6 @@
 /venv
+
+knn_model.pkl
+lr_model.pkl
+X_pickle.pkl
+scaler.pkl
