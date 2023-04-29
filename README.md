@@ -16,7 +16,7 @@ The two models used are: <br>
 
 # Getting Started
 To get started with the house price prediction model, you will need to have Python 3 installed on your system. Once you have Python 3 installed, you can clone this repository and install the required dependencies:
->git clone https://github.com/DevPrinceK/house-price-prediction-model.git <br>
+>git clone https://github.com/DevPrinceK/house-price-prediction.git <br>
 >cd house-price-prediction-model <br>
 >pip install -r requirements.txt 
 
