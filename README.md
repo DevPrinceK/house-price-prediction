@@ -57,6 +57,7 @@ Contributions to the house price prediction model are welcome. If you find a bug
 **numpy** <br>
 
 # Links
+You can find [The React Frontend here](https://github.com/Desmondgoldsmith/House_price_prediction_project) <br>
 You can find [The Datasets here](https://www.kaggle.com/datasets/shree1992/housedata/versions/2?resource=download) <br>
 You can find [Scikit-learn documentation here](https://scikit-learn.org/0.18/_downloads/scikit-learn-docs.pdf) <br>
 You can find [scikit-learn linear regression here](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html) <br>
