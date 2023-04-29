@@ -111,25 +111,6 @@ def get_cities():
         return {"cities": cities.tolist()}
 
 
-# NOTE: This function is not needed anymore
-# @app.get('/cities')
-# def get_cities():
-#     '''this function returns the unique values of the city column'''
-#     try:
-#         df = pd.read_csv('data/data.csv')
-
-#         # remove all rows with missing values
-#         df = df.dropna(axis=1)
-
-#         cities = df['city'].unique()
-#     except Exception as err:
-#         print(f"Error: {err}")
-#         import traceback
-#         traceback.print_exc()
-#         return {'Error': err}
-#     else:
-#         return cities
-
 
 @app.post('/predict')
 def predict_house_price(house_features: House):
