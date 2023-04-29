@@ -4,11 +4,11 @@ This is a machine learning model that predicts the price of a house based on var
 # Table of Contents
 **Getting Started** <br>
 **Training** <br>
-**Run** <br>
+**Running** <br>
 **EndPoints** <br>
-**Built With** <br>
 **Contributing** <br>
-**Acknowledgments**
+**Built With** <br>
+**Links**
 
 # Getting Started
 To get started with the house price prediction model, you will need to have Python 3 installed on your system. Once you have Python 3 installed, you can clone this repository and install the required dependencies:
@@ -50,7 +50,6 @@ The cities endpoint fetches all the unique cities in our dataset. This is useful
 Contributions to the house price prediction model are welcome. If you find a bug or have a suggestion for improvement, please open an issue or submit a pull request.
 
 
-
 # Built With
 **Python 3** <br>
 **scikit-learn** <br>
@@ -59,6 +58,8 @@ Contributions to the house price prediction model are welcome. If you find a bug
 
 # Links
 You can find [The Datasets here](https://www.kaggle.com/datasets/shree1992/housedata/versions/2?resource=download) <br>
-
+You can find [Scikit-learn documentation here](https://scikit-learn.org/0.18/_downloads/scikit-learn-docs.pdf) <br>
+You can find [scikit-learn linear regression here](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html) <br>
+You can find [scikit-learn knn here](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html) <br>
 
 
