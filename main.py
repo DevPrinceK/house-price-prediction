@@ -28,11 +28,15 @@ class House(BaseModel):
     city: str
 
 
-def load_model():
+def load_models():
     '''this loads the model from the dir and return it to the predict function'''
     with open('models/lr_model.pkl', 'rb') as file:
-        model = pickle.load(file)
-    return model
+        lr_model = pickle.load(file)
+
+    with open('models/knn_model.pkl', 'rb') as file:
+        knn_model = pickle.load(file)
+
+    return lr_model, knn_model
 
 
 def load_scaler():
@@ -70,10 +74,11 @@ def scale_input_features(input_features: House):
 
 def predict(features: House):
     '''this function takes the features and returns the prediction'''
-    model = load_model()
+    lr_model, knn_model = load_models()
     scaled_features = scale_input_features(features)
-    prediction = model.predict(scaled_features)
-    return prediction
+    lr_prediction = lr_model.predict(scaled_features)
+    knn_prediction = knn_model.predict(scaled_features)
+    return lr_prediction, knn_prediction
 
 
 @app.get('/')
@@ -82,10 +87,22 @@ def preview():
     return {'Hello World': 'House Price Prediction System API [v1].'}
 
 
+@app.get('/cities')
+def get_unique_values():
+    '''this function returns the unique values of the city column'''
+    try:
+        df = pd.read_csv('data/data.csv')
+        cities = df['city'].unique()
+    except Exception as err:
+        return {'Error': err}
+    else:
+        return {'cities': cities, 'Total Cities': len(cities)}
+
+
 @app.post('/predict')
 def predict_house_price(house_features: House):
     '''this function takes the features and returns the prediction'''
-    sample_input = {
+    input_features = {
         'bedrooms': house_features.bedrooms,
         'bathrooms': house_features.bathrooms,
         'sqft_living': house_features.sqft_living,
@@ -96,6 +113,12 @@ def predict_house_price(house_features: House):
         'city': house_features.city
     }
 
-    prediction = predict(sample_input)
+    lr_prediction, knn_prediction = predict(input_features)
 
-    return {'prediction': prediction[0]}
+    return {
+        'prediction': [
+            {"LR": lr_prediction[0]},
+            {"KNN": knn_prediction[0]},
+            {"AVG": (lr_prediction[0]+knn_prediction[0])/2},
+        ]
+    }
